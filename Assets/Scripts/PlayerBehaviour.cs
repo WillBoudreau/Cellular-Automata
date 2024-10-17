@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     Rigidbody rigidbody;
-    public int speed = 10;
+    public int speed = 5;
     Vector3 velocity;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
-        
+
         velocity = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized * speed;
     }
 

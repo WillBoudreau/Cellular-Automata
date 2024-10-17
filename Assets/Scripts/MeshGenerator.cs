@@ -45,7 +45,7 @@ public class MeshGenerator : MonoBehaviour
     }
     void CreateWallMesh()
     {
-        CalcvulateMeshOutlines();
+        CalculateMeshOutlines();
         List<Vector3> wallVertices = new List<Vector3>();
         List<int> wallTriangles = new List<int>();
         Mesh wallMesh = new Mesh();
@@ -75,7 +75,11 @@ public class MeshGenerator : MonoBehaviour
         wallMesh.triangles = wallTriangles.ToArray();
         walls.mesh = wallMesh;
 
-        MeshCollider wallCollider = walls.gameObject.AddComponent<MeshCollider>();
+        MeshCollider wallCollider = walls.gameObject.GetComponent<MeshCollider>();
+        if (wallCollider == null)
+        {
+            wallCollider = walls.gameObject.AddComponent<MeshCollider>();
+        }
         wallCollider.sharedMesh = wallMesh;
     }
     void TriangulateSquare(Square square)
@@ -168,7 +172,7 @@ public class MeshGenerator : MonoBehaviour
             vertices.Add(points[i].pos);
         }
     }
-    void CalcvulateMeshOutlines()
+    void CalculateMeshOutlines()
     {
         for(int vertexIndex = 0; vertexIndex < vertices.Count; vertexIndex++)
         {
